@@ -1,6 +1,6 @@
 const { celebrate, Joi } = require('celebrate');
 
-const regexp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+const REGEX_URL = /(http:\/\/(?:www.|(?!www))[A-z0-9-]+\.[^\s]+)|(https:\/\/(?:www.|(?!www))[A-z0-9-]+\.[^\s]+)/;
 
 const validateLogin = celebrate({
   body: Joi.object().keys({
@@ -13,50 +13,43 @@ const validateRegistration = celebrate({
   body: Joi.object().keys({
     email: Joi.string().min(7).required().email(),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(regexp),
-  }),
-});
-
-const validateCardId = celebrate({
-  params: Joi.object().keys({
-    cardId: Joi.string().hex().length(24).required(),
-  }),
-});
-
-const validateNewCard = celebrate({
-  body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    link: Joi.string().pattern(regexp).required(),
-  }),
-});
-
-const validateUserId = celebrate({
-  params: Joi.object().keys({
-    userId: Joi.string().hex().length(24).required(),
-  }),
-});
-
-const validateUserUpdateAvatar = celebrate({
-  body: Joi.object().keys({
-    avatar: Joi.string().pattern(regexp).required(),
   }),
 });
 
 const validateUserUpdate = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    about: Joi.string().min(2).max(30).required(),
+    email: Joi.string().required().email(),
+  }),
+});
+
+const validateNewMovie = celebrate({
+  body: Joi.object().keys({
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    description: Joi.string().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+    duration: Joi.number().required(),
+    movieId: Joi.number().required(),
+    image: Joi.string().required().pattern(REGEX_URL),
+    trailerLink: Joi.string().required().pattern(REGEX_URL),
+    thumbnail: Joi.string().required().pattern(REGEX_URL),
+    year: Joi.string().length(4).required(),
+  }),
+});
+
+const validateMovieId = celebrate({
+  params: Joi.object().keys({
+    movieId: Joi.string().hex().length(24).required(),
   }),
 });
 
 module.exports = {
   validateLogin,
   validateRegistration,
-  validateCardId,
-  validateNewCard,
-  validateUserId,
-  validateUserUpdateAvatar,
+  validateNewMovie,
+  validateMovieId,
   validateUserUpdate,
 };
