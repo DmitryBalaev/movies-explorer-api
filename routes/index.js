@@ -11,6 +11,6 @@ router.use('/movies', auth, require('./movieRouter'));
 router.use('/signin', validateLogin, login);
 router.use('/signup', validateRegistration, createUser);
 
-router.use('*', (req, res, next) => next(new NotFound(NOT_FOUND_ERROR)));
+router.use('*', auth, (req, res, next) => next(new NotFound(NOT_FOUND_ERROR)));
 
 module.exports = router;
