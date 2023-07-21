@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const NotFound = require('../utils/responsesErrors/NotFound');
+const { NotFound } = require('../utils/responsesErrors/NotFound');
 const { NOT_FOUND_ERROR } = require('../utils/constants');
 const { login, createUser } = require('../controllers/users');
 const auth = require('../middlewares/auth');

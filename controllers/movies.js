@@ -33,7 +33,7 @@ const deleteMovies = (req, res, next) => {
       if (!movie.equals(req.user._id)) {
         return next(new Forbidden(FORBIDDEN_ERROR));
       }
-      return Movie.deleteOne(movie).then(() => res.send({ message: 'Фильм удален.' }));
+      return movie.deleteOne().then(() => res.send({ message: 'Фильм удален.' }));
     })
     .catch(next);
 };

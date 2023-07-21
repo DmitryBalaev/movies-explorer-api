@@ -8,7 +8,6 @@ const handleError = (req, res, next) => {
   next(new Unauthorized(TOKEN_ERROR));
 };
 
-// eslint-disable-next-line consistent-return
 module.exports = function authMiddleware(req, res, next) {
   const { authorization } = req.headers;
   let payload;
@@ -27,5 +26,5 @@ module.exports = function authMiddleware(req, res, next) {
 
   req.user = payload;
 
-  next();
+  return next();
 };

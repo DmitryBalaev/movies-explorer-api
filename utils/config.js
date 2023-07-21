@@ -1,7 +1,7 @@
 const reteLimiter = require('express-rate-limit');
 
 const SECRET = process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev';
-const { MONGO_DB } = process.env;
+const { MONGO_DB } = process.env || 'mongodb://127.0.0.1:27017/bitfilmsdb';
 const PORT = process.env.PORT || 3000;
 const MONGO_DB_OPTIONS = {
   useUnifiedTopology: true,
