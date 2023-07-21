@@ -1,6 +1,6 @@
 const STATUS_OK_CREATED = 201;
 const STATUS_OK = 200;
-const LOGIN_ERROR = 'Неверные почта или пароль.';
+const LOGIN_ERROR = 'Неверные почта или пароль';
 const EMAIL_VALIDATION_ERROR = 'Некорректный email.';
 const URL_VALIDATION_ERROR = 'Неккоректный URL.';
 const DUPLICATE_ERROR = 'Пользователь с таким email уже существует.';
