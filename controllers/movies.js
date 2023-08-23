@@ -30,7 +30,7 @@ const deleteMovies = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .orFail(new NotFound(ID_NOT_FOUND_ERROR))
     .then((movie) => {
-      if (!movie.equals(req.user._id)) {
+      if (!movie.owner.equals(req.user._id)) {
         return next(new Forbidden(FORBIDDEN_ERROR));
       }
       return movie.deleteOne().then(() => res.send({ message: 'Фильм удален.' }));
